@@ -3,7 +3,7 @@ package com.example.simpletestexecution
 import com.example.simpletestexecution.datasource.RemoteDataSource
 import com.example.simpletestexecution.dispatcher.DispatcherProvider
 import com.example.simpletestexecution.helper.Result
-import kotlinx.coroutines.CoroutineDispatcher
+import com.google.gson.JsonArray
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -15,7 +15,7 @@ class AppRepositoryImpl @Inject constructor(
     private val dispatcher: DispatcherProvider
 ): AppRepository {
 
-    override fun getRandomNumber(): Flow<Result<JSONArray>> {
+    override fun getRandomNumber(): Flow<Result<JsonArray>> {
         return flow {
             emit(remoteDataSource.getRandomNumber())
         }.flowOn(dispatcher.io)

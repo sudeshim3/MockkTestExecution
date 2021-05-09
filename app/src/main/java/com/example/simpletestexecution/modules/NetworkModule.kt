@@ -6,6 +6,7 @@ import dagger.Provides
 import okhttp3.Call
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -15,12 +16,13 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        okHttpClient: Call.Factory
+        okHttpClient: Call.Factory,
+        gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://www.randomnumberapi.com/api/v1.0")
+            .baseUrl("http://www.randomnumberapi.com/api/v1.0/")
             .callFactory(okHttpClient)
-//            .addConverterFactory(gsonConverterFactory)
+            .addConverterFactory(gsonConverterFactory)
             .build()
     }
 
@@ -35,9 +37,9 @@ object NetworkModule {
         }.build()
     }
 
-    /*@Provides
+    @Provides
     @Singleton
-    fun provideGsonFactory(): GsonConverterFactory = GsonConverterFactory.create()*/
+    fun provideGsonFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
     @Singleton
